@@ -1,0 +1,3831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fake MM</title>
+	<meta property="og:title" content="Fake MM" />
+	<meta property="og:description" content="The first and only legit fake MM service in the community." />
+  <meta property="og:image" content="https://fakemm.com/assets/mm.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    document.documentElement.classList.add("js-ready");
+  </script>
+  <style>
+    :root {
+      --bg: #010204;
+      --bg-elevated: #060911;
+      --bg-panel: rgba(5, 8, 14, 0.84);
+      --bg-panel-strong: rgba(7, 11, 20, 0.92);
+      --surface: rgba(255, 255, 255, 0.04);
+      --surface-strong: rgba(73, 161, 255, 0.12);
+      --line: rgba(101, 179, 255, 0.14);
+      --line-strong: rgba(112, 192, 255, 0.3);
+      --text: #ffffff;
+      --muted: rgba(227, 238, 255, 0.76);
+      --soft: rgba(191, 210, 237, 0.56);
+      --accent: #ffffff;
+      --accent-strong: #2ea3ff;
+      --accent-glow: rgba(46, 163, 255, 0.28);
+      --shadow-xl: 0 36px 110px rgba(0, 0, 0, 0.56);
+      --shadow-lg: 0 24px 62px rgba(0, 0, 0, 0.42);
+      --radius-sm: 1rem;
+      --radius-md: 1.5rem;
+      --radius-lg: 2rem;
+      --radius-xl: 2.75rem;
+      --container: 1240px;
+      --header-offset: 6rem;
+      --section-space: clamp(4.5rem, 8vw, 8rem);
+      --hero-shift: 0px;
+      --mouse-x: 50%;
+      --mouse-y: 18%;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      font-family: "Sora", sans-serif;
+      line-height: 1.65;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% 16%, rgba(29, 140, 255, 0.32), transparent 20%),
+        radial-gradient(circle at 18% 0%, rgba(25, 90, 200, 0.18), transparent 22%),
+        radial-gradient(circle at 82% 14%, rgba(11, 27, 59, 0.34), transparent 24%),
+        linear-gradient(180deg, #020305 0%, #030509 26%, #050812 54%, #020307 100%);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(87, 156, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(87, 156, 255, 0.045) 1px, transparent 1px);
+      background-size: 92px 92px;
+      opacity: 0.13;
+      mask-image: radial-gradient(circle at center, black 28%, transparent 82%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(32rem circle at var(--mouse-x) var(--mouse-y), rgba(31, 143, 255, 0.16), transparent 62%);
+      mix-blend-mode: screen;
+      opacity: 0.92;
+    }
+
+    ::selection {
+      color: #fff;
+      background: rgba(144, 214, 255, 0.24);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a,
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid rgba(144, 214, 255, 0.76);
+      outline-offset: 4px;
+    }
+
+    .inline-link {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(144, 214, 255, 0.36);
+      text-underline-offset: 0.2em;
+      transition: color 180ms ease, text-decoration-color 180ms ease;
+    }
+
+    .inline-link:hover {
+      color: #ffffff;
+      text-decoration-color: rgba(255, 255, 255, 0.55);
+    }
+
+    .page-shell {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .page-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 120rem;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(28, 126, 255, 0.18), transparent 18%),
+        radial-gradient(circle at 82% 24%, rgba(95, 183, 255, 0.08), transparent 16%),
+        radial-gradient(circle at 52% 58%, rgba(17, 42, 94, 0.22), transparent 24%);
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 40;
+      padding: 1rem 1rem 0;
+      pointer-events: none;
+    }
+
+    .header-bar {
+      width: min(100%, calc(var(--container) + 2rem));
+      margin: 0 auto;
+      padding: 0.9rem 1rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid rgba(104, 181, 255, 0.16);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+        rgba(3, 6, 12, 0.86);
+      backdrop-filter: blur(24px) saturate(130%);
+      -webkit-backdrop-filter: blur(24px) saturate(130%);
+      box-shadow:
+        0 18px 44px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.02),
+        0 0 38px rgba(36, 138, 255, 0.1);
+      pointer-events: auto;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.9rem;
+      min-width: 0;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(244, 247, 251, 0.92);
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 2.7rem;
+      height: 2.7rem;
+      border-radius: 1rem;
+      display: block;
+      overflow: hidden;
+      border: 1px solid rgba(105, 184, 255, 0.32);
+      background: rgba(4, 7, 13, 0.96);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 14px 28px rgba(0, 0, 0, 0.34),
+        0 0 26px rgba(35, 138, 255, 0.16);
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .nav-links {
+      display: none;
+      justify-self: center;
+      align-items: center;
+      gap: 1.4rem;
+      min-width: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color 200ms ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -0.35rem;
+      height: 1px;
+      transform: scaleX(0);
+      transform-origin: center;
+      background: linear-gradient(90deg, transparent, rgba(216, 239, 255, 0.8), transparent);
+      transition: transform 220ms var(--ease);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
+      transform: scaleX(1);
+    }
+
+    .nav-contact {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3rem;
+      padding: 0.8rem 1.15rem;
+      border-radius: 999px;
+      border: 1px solid rgba(94, 174, 255, 0.3);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(46, 163, 255, 0.18)),
+        rgba(9, 20, 38, 0.82);
+      color: #f7fbff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: transform 220ms var(--ease), border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 26px rgba(33, 132, 255, 0.12);
+    }
+
+    .nav-contact:hover {
+      transform: translateY(-2px);
+      border-color: rgba(117, 193, 255, 0.48);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(46, 163, 255, 0.26)),
+        rgba(10, 24, 44, 0.9);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 14px 32px rgba(0, 0, 0, 0.34),
+        0 0 30px rgba(33, 132, 255, 0.16);
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      position: relative;
+      scroll-margin-top: 7.5rem;
+    }
+
+    .container {
+      width: min(100% - 2rem, var(--container));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.3rem;
+      color: rgba(244, 247, 251, 0.72);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 2.65rem;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(216, 239, 255, 0.92), rgba(216, 239, 255, 0));
+    }
+
+    .section {
+      padding: var(--section-space) 0;
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: min(calc(100% - 2rem), var(--container));
+      height: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+      pointer-events: none;
+    }
+
+    .section-heading {
+      display: grid;
+      gap: 0.9rem;
+      max-width: 45rem;
+    }
+
+    .section-heading h2,
+    .trust-top h2,
+    .contact-panel h2 {
+      margin: 0;
+      font-size: clamp(2.35rem, 6vw, 4.6rem);
+      line-height: 0.97;
+      letter-spacing: -0.06em;
+      font-weight: 700;
+      text-wrap: balance;
+    }
+
+    .section-heading p,
+    .trust-top p,
+    .contact-panel p {
+      margin: 0;
+      max-width: 42rem;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.85;
+      text-wrap: pretty;
+    }
+
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      padding: calc(var(--header-offset) + 1.4rem) 0 4rem;
+      overflow: clip;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 38rem;
+      height: 38rem;
+      top: -12rem;
+      left: -11rem;
+      background: rgba(144, 214, 255, 0.14);
+    }
+
+    .hero::after {
+      width: 26rem;
+      height: 26rem;
+      right: -6rem;
+      bottom: 0;
+      background: rgba(93, 123, 174, 0.18);
+    }
+
+    .hero-layout,
+    .trust-top,
+    .trust-columns,
+    .faq-stage,
+    .contact-panel {
+      display: grid;
+      gap: clamp(1.5rem, 4vw, 4rem);
+      align-items: center;
+    }
+
+    .hero-layout > *,
+    .trust-top > *,
+    .trust-columns > *,
+    .faq-stage > *,
+    .contact-panel > * {
+      min-width: 0;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 41rem;
+      grid-area: copy;
+    }
+
+    .hero-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.7rem 0.9rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .hero-copy .eyebrow {
+      margin-bottom: 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2rem;
+      padding: 0.5rem 0.82rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.02);
+      color: rgba(244, 247, 251, 0.74);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .hero-copy h1 {
+      margin: 0;
+      font-size: clamp(3.15rem, 8.2vw, 6.9rem);
+      line-height: 0.9;
+      letter-spacing: -0.085em;
+      font-weight: 800;
+      max-width: 11.8ch;
+      text-wrap: balance;
+      background: linear-gradient(180deg, #ffffff 10%, #f4fbff 52%, #58bcff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 16px 40px rgba(21, 110, 255, 0.12);
+    }
+
+    .hero-copy p {
+      margin: 1.35rem 0 0;
+      max-width: 35rem;
+      color: var(--muted);
+      font-size: clamp(0.98rem, 1.75vw, 1.08rem);
+      line-height: 1.82;
+    }
+
+    .hero-stage {
+      position: relative;
+      display: grid;
+      gap: 1.25rem;
+      padding: clamp(1.35rem, 3vw, 2.2rem);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: calc(var(--radius-xl) + 0.35rem);
+      background:
+        radial-gradient(circle at 84% 18%, rgba(144, 214, 255, 0.14), transparent 20%),
+        radial-gradient(circle at 10% 78%, rgba(255, 255, 255, 0.06), transparent 22%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(7, 10, 15, 0.7);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+    }
+
+    .hero-stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 34%, transparent 68%, rgba(255, 255, 255, 0.03));
+    }
+
+    .hero-stage > * {
+      min-width: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-scope {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.65rem;
+      max-width: 33rem;
+    }
+
+    .hero-scope span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.15rem;
+      padding: 0.55rem 0.82rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
+        rgba(255, 255, 255, 0.02);
+      color: rgba(244, 247, 251, 0.82);
+      font-size: 0.77rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .hero-desk {
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+      padding: 1.2rem;
+      grid-area: desk;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.9rem;
+      background:
+        radial-gradient(circle at 88% 12%, rgba(216, 239, 255, 0.1), transparent 22%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+        rgba(10, 14, 21, 0.82);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 22px 48px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-desk-head small {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: rgba(244, 247, 251, 0.42);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .hero-desk-head strong {
+      display: block;
+      font-size: 1.28rem;
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-desk-head p {
+      margin: 0.65rem 0 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.75;
+    }
+
+    .hero-contact-stack {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .hero-contact {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.88rem 0.92rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.3rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+        rgba(255, 255, 255, 0.02);
+      transition:
+        transform 220ms var(--ease),
+        border-color 220ms ease,
+        background 220ms ease,
+        box-shadow 220ms ease;
+      overflow: hidden;
+    }
+
+    .hero-contact::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 50%, rgba(255, 255, 255, 0.02));
+    }
+
+    .hero-contact:hover {
+      transform: translateY(-2px);
+      border-color: rgba(144, 214, 255, 0.22);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.03);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.16);
+    }
+
+    .hero-contact-avatar,
+    .hero-contact-mark {
+      position: relative;
+      z-index: 1;
+      width: 3rem;
+      height: 3rem;
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.14rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+        rgba(255, 255, 255, 0.03);
+      overflow: hidden;
+    }
+
+    .hero-contact-avatar img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 0.82rem;
+    }
+
+    .hero-contact-mark {
+      padding: 0;
+      color: #f8fbff;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .hero-contact-copy {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 0.12rem;
+      min-width: 0;
+    }
+
+    .hero-contact-copy small {
+      color: rgba(244, 247, 251, 0.42);
+      font-size: 0.64rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .hero-contact-copy strong {
+      display: block;
+      font-size: 0.98rem;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-contact-copy span {
+      color: rgba(244, 247, 251, 0.58);
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .hero-contact-arrow {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 4.2rem;
+      min-height: 2.15rem;
+      padding: 0.55rem 0.8rem;
+      border: 1px solid rgba(144, 214, 255, 0.18);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(216, 239, 255, 0.16), rgba(144, 214, 255, 0.07)),
+        rgba(255, 255, 255, 0.03);
+      color: var(--accent);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .hero-contact-clark {
+      background:
+        radial-gradient(circle at 14% 50%, rgba(248, 251, 255, 0.14), transparent 18%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+        rgba(255, 255, 255, 0.02);
+    }
+
+    .hero-contact-xavier {
+      background:
+        radial-gradient(circle at 14% 50%, rgba(210, 123, 58, 0.16), transparent 18%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+        rgba(255, 255, 255, 0.02);
+    }
+
+    .hero-desk-note {
+      margin: 0;
+      padding: 0.95rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.2rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025)),
+        rgba(255, 255, 255, 0.02);
+      color: rgba(244, 247, 251, 0.62);
+      font-size: 0.88rem;
+      line-height: 1.72;
+    }
+
+    .hero-proof-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-area: proof;
+      gap: 1px;
+      padding: 1px;
+      border-radius: 1.45rem;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .hero-proof-item {
+      padding: 1.05rem 1rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(9, 12, 18, 0.84);
+    }
+
+    .hero-proof-item strong {
+      display: block;
+      margin-bottom: 0.28rem;
+      font-size: 1.02rem;
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .hero-proof-item span {
+      display: block;
+      color: var(--soft);
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+
+    .hero-ledger {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      max-width: 37rem;
+      margin-top: 1.7rem;
+    }
+
+    .hero-ledger div {
+      position: relative;
+      padding: 1rem 1rem 1.05rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.3rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+        rgba(8, 11, 16, 0.62);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 14px 28px rgba(0, 0, 0, 0.14);
+      overflow: hidden;
+    }
+
+    .hero-ledger div::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(216, 239, 255, 0.45), rgba(216, 239, 255, 0));
+      pointer-events: none;
+    }
+
+    .hero-ledger small {
+      display: block;
+      margin-bottom: 0.42rem;
+      color: rgba(244, 247, 251, 0.48);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .hero-ledger strong {
+      display: block;
+      color: rgba(244, 247, 251, 0.9);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.85rem;
+    }
+
+    .button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      min-height: 3.45rem;
+      padding: 0.95rem 1.3rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      overflow: hidden;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition:
+        transform 220ms var(--ease),
+        border-color 220ms ease,
+        background 220ms ease,
+        box-shadow 220ms ease,
+        color 220ms ease;
+      will-change: transform;
+    }
+
+    .button-avatar {
+      position: relative;
+      z-index: 1;
+      width: 1.7rem;
+      height: 1.7rem;
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.12rem;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.04);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+      overflow: hidden;
+    }
+
+    .button-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .button::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 22%, rgba(255, 255, 255, 0.18) 48%, transparent 74%);
+      transform: translateX(-150%);
+      transition: transform 420ms var(--ease);
+      pointer-events: none;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button:hover::before {
+      transform: translateX(150%);
+    }
+
+    .button-primary {
+      border-color: rgba(144, 214, 255, 0.28);
+      background:
+        linear-gradient(180deg, rgba(216, 239, 255, 0.24), rgba(144, 214, 255, 0.1)),
+        rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 14px 36px rgba(4, 7, 12, 0.28);
+    }
+
+    .button-primary:hover {
+      border-color: rgba(144, 214, 255, 0.42);
+      background:
+        linear-gradient(180deg, rgba(216, 239, 255, 0.3), rgba(144, 214, 255, 0.14)),
+        rgba(255, 255, 255, 0.07);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 18px 40px rgba(4, 7, 12, 0.34);
+    }
+
+    .button-secondary {
+      border-color: rgba(255, 255, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.025);
+      color: var(--text);
+    }
+
+    .button-secondary:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.04);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.2);
+    }
+
+    .button-person {
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.72rem;
+      padding-left: 0.95rem;
+      padding-right: 1.3rem;
+    }
+
+    .button-person .button-avatar {
+      width: 1.85rem;
+      height: 1.85rem;
+    }
+
+    .button-copy {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.12rem;
+      line-height: 1.08;
+    }
+
+    .button-copy strong {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .button-copy small {
+      color: rgba(244, 247, 251, 0.5);
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .button-clark {
+      border-color: rgba(171, 220, 255, 0.34);
+      background:
+        radial-gradient(circle at 14% 50%, rgba(248, 251, 255, 0.22), transparent 18%),
+        linear-gradient(180deg, rgba(216, 239, 255, 0.28), rgba(144, 214, 255, 0.11)),
+        rgba(255, 255, 255, 0.05);
+    }
+
+    .button-clark:hover {
+      border-color: rgba(190, 228, 255, 0.46);
+      background:
+        radial-gradient(circle at 14% 50%, rgba(248, 251, 255, 0.24), transparent 18%),
+        linear-gradient(180deg, rgba(216, 239, 255, 0.34), rgba(144, 214, 255, 0.16)),
+        rgba(255, 255, 255, 0.07);
+    }
+
+    .button-xavier {
+      border-color: rgba(190, 127, 76, 0.24);
+      background:
+        radial-gradient(circle at 14% 50%, rgba(200, 119, 52, 0.22), transparent 18%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.025);
+    }
+
+    .button-xavier:hover {
+      border-color: rgba(214, 143, 85, 0.36);
+      background:
+        radial-gradient(circle at 14% 50%, rgba(215, 130, 60, 0.26), transparent 18%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04)),
+        rgba(255, 255, 255, 0.04);
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    .hero-meta div {
+      padding: 1rem 0.95rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.35rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(7, 10, 14, 0.66);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+    }
+
+    .hero-meta strong {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 1.08rem;
+      line-height: 1.2;
+      letter-spacing: -0.05em;
+      font-weight: 700;
+    }
+
+    .hero-meta span {
+      display: block;
+      color: var(--soft);
+      font-size: 0.83rem;
+      line-height: 1.55;
+      text-wrap: balance;
+    }
+
+    .hero-visual-wrap {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 30rem;
+      transform: translateY(var(--hero-shift));
+    }
+
+    .hero-visual-wrap::before {
+      content: "";
+      position: absolute;
+      width: min(85vw, 34rem);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(216, 239, 255, 0.24), rgba(144, 214, 255, 0.05) 40%, transparent 66%);
+      filter: blur(24px);
+      opacity: 0.9;
+    }
+
+    .orbital {
+      position: relative;
+      width: min(85vw, 36rem);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      isolation: isolate;
+    }
+
+    .orbital::before {
+      content: "";
+      position: absolute;
+      inset: 10%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 28%, rgba(216, 239, 255, 0.16), transparent 28%),
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.04), transparent 58%);
+      filter: blur(2px);
+    }
+
+    .orbital::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+        0 34px 80px rgba(0, 0, 0, 0.34);
+    }
+
+    .orbital-ring,
+    .orbital-track,
+    .orbital-core,
+    .orbital-dot {
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .orbital-ring {
+      inset: 0;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.02), transparent 65%);
+    }
+
+    .orbital-ring.ring-a {
+      inset: 5%;
+      animation: spin 24s linear infinite;
+    }
+
+    .orbital-ring.ring-b {
+      inset: 14%;
+      border-color: rgba(144, 214, 255, 0.14);
+      animation: spin-reverse 30s linear infinite;
+    }
+
+    .orbital-ring.ring-c {
+      inset: 26%;
+      border-color: rgba(255, 255, 255, 0.12);
+      animation: pulse 6s ease-in-out infinite;
+    }
+
+    .orbital-track {
+      inset: 11%;
+      border: 1px dashed rgba(255, 255, 255, 0.14);
+      opacity: 0.6;
+      animation: spin 26s linear infinite;
+    }
+
+    .orbital-track.track-b {
+      inset: 22%;
+      border-style: solid;
+      opacity: 0.36;
+      animation-duration: 34s;
+      animation-direction: reverse;
+    }
+
+    .orbital-core {
+      width: 36%;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background:
+        radial-gradient(circle at 30% 22%, rgba(216, 239, 255, 0.2), transparent 48%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03)),
+        rgba(12, 17, 25, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 18px 42px rgba(0, 0, 0, 0.24);
+      z-index: 3;
+    }
+
+    .orbital-core strong {
+      display: block;
+      font-size: clamp(2rem, 7vw, 3.1rem);
+      line-height: 1;
+      letter-spacing: -0.09em;
+      font-weight: 800;
+    }
+
+    .orbital-core span {
+      display: block;
+      margin-top: 0.4rem;
+      color: rgba(244, 247, 251, 0.56);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .orbital-dot {
+      width: 0.72rem;
+      height: 0.72rem;
+      background: #ffffff;
+      box-shadow: 0 0 18px rgba(216, 239, 255, 0.88);
+      z-index: 4;
+    }
+
+    .orbital-dot.dot-a {
+      top: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .orbital-dot.dot-b {
+      bottom: 18%;
+      left: 18%;
+    }
+
+    .orbital-dot.dot-c {
+      top: 23%;
+      right: 14%;
+    }
+
+    .orbital-labels {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      color: rgba(244, 247, 251, 0.48);
+      font-size: 0.74rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .orbital-labels span {
+      position: absolute;
+    }
+
+    .orbital-labels span:nth-child(1) {
+      top: 13%;
+      left: 11%;
+    }
+
+    .orbital-labels span:nth-child(2) {
+      top: 49%;
+      right: 5%;
+    }
+
+    .orbital-labels span:nth-child(3) {
+      bottom: 7%;
+      left: 35%;
+    }
+
+    .deal-tape-section {
+      padding: 0 0 calc(var(--section-space) * 0.9);
+    }
+
+    .deal-tape {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(8, 11, 16, 0.76);
+      box-shadow: var(--shadow-lg);
+      animation: border-pulse 2s infinite;
+    }
+
+    .deal-tape::before,
+    .deal-tape::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 6rem;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .deal-tape::before {
+      left: 0;
+      background: linear-gradient(90deg, rgba(8, 11, 16, 0.98), rgba(8, 11, 16, 0));
+    }
+
+    .deal-tape::after {
+      right: 0;
+      background: linear-gradient(270deg, rgba(8, 11, 16, 0.98), rgba(8, 11, 16, 0));
+    }
+
+    .deal-tape-window {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .deal-tape-track {
+      display: flex;
+      align-items: center;
+      gap: 2.4rem;
+      padding: 1rem 1.4rem;
+      white-space: nowrap;
+      width: max-content;
+    }
+
+    .deal-tape-track span {
+      display: inline-flex;
+      flex: none;
+      align-items: center;
+      gap: 0.7rem;
+      color: rgba(244, 247, 251, 0.76);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .deal-tape-track span::before {
+      content: "";
+      width: 0.38rem;
+      height: 0.38rem;
+      flex: none;
+      border-radius: 50%;
+      background: rgba(216, 239, 255, 0.9);
+      box-shadow: 0 0 18px rgba(216, 239, 255, 0.5);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+    }
+
+    .stage-panel,
+    .trust-panel,
+    .faq-stage,
+    .contact-panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(8, 11, 16, 0.74);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .stage-panel::before,
+    .trust-panel::before,
+    .faq-stage::before,
+    .contact-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 28%, transparent 72%, rgba(255, 255, 255, 0.03));
+    }
+
+    .services-stage {
+      padding: clamp(1.5rem, 4vw, 2.6rem);
+    }
+
+    .services-stage::after,
+    .trust-panel::after,
+    .faq-stage::after,
+    .contact-panel::after {
+      content: "";
+      position: absolute;
+      width: 26rem;
+      height: 26rem;
+      border-radius: 50%;
+      top: -11rem;
+      right: -11rem;
+      background: radial-gradient(circle, rgba(144, 214, 255, 0.14), transparent 68%);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .services-intro {
+      display: grid;
+      gap: 1.6rem;
+      align-items: end;
+      margin-bottom: 2.4rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .services-note {
+      position: relative;
+      padding: 1.35rem 1.3rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: calc(var(--radius-md) + 0.15rem);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+        rgba(255, 255, 255, 0.025);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .services-note small,
+    .contact-card small {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: rgba(244, 247, 251, 0.44);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .services-note strong,
+    .contact-card strong {
+      display: block;
+      font-size: 1.08rem;
+      line-height: 1.4;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .services-note p,
+    .contact-card p,
+    .rule-item p,
+    .proof-item p,
+    .faq-panel p,
+    .contact-note {
+      margin: 0.65rem 0 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 0.96rem;
+    }
+
+    .services-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .service-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 14rem;
+      padding: 1.5rem;
+      border: 1px solid var(--line);
+      border-radius: 1.8rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.02);
+      transition:
+        transform 260ms var(--ease),
+        border-color 260ms ease,
+        background 260ms ease,
+        box-shadow 260ms ease;
+    }
+
+    .service-card::after {
+      content: "";
+      position: absolute;
+      inset: auto 1.5rem 1.4rem;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(144, 214, 255, 0.35), rgba(255, 255, 255, 0));
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--line-strong);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.03);
+      box-shadow: 0 22px 42px rgba(0, 0, 0, 0.2);
+    }
+
+    .service-index {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      min-height: 2rem;
+      margin-bottom: 1.35rem;
+      padding: 0.38rem 0.68rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
+        rgba(255, 255, 255, 0.025);
+      color: rgba(244, 247, 251, 0.72);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .service-card h3 {
+      margin: 0;
+      max-width: 18ch;
+      font-size: 1.32rem;
+      line-height: 1.18;
+      letter-spacing: -0.05em;
+      font-weight: 700;
+    }
+
+    .service-card p {
+      margin: 0.78rem 0 0;
+      max-width: 24rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.78;
+    }
+
+    .service-card .service-note {
+      margin-top: auto;
+      padding: 1.15rem 0 0;
+      border: 0;
+      background: none;
+      box-shadow: none;
+      border-radius: 0;
+      color: rgba(244, 247, 251, 0.46);
+      font-size: 0.79rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .trust-panel,
+    .faq-stage,
+    .contact-panel {
+      padding: clamp(1.5rem, 4vw, 2.9rem);
+    }
+
+    .trust-top {
+      align-items: end;
+      padding-bottom: 1.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .trust-metrics {
+      display: grid;
+      gap: 0.95rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 1.8rem;
+    }
+
+    .metric {
+      position: relative;
+      padding: 1.15rem 1rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 1.4rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.02);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: clamp(1.7rem, 5vw, 2.8rem);
+      line-height: 1;
+      letter-spacing: -0.07em;
+      font-weight: 800;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      text-wrap: balance;
+    }
+
+    .metric strong.metric-value-compact {
+      font-size: clamp(1.4rem, 3.2vw, 2.25rem);
+      line-height: 1.04;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 0.5rem;
+      color: var(--soft);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .trust-columns {
+      align-items: start;
+      margin-top: 2rem;
+    }
+
+    .list-block {
+      padding-top: 0.2rem;
+    }
+
+    .proof-block {
+      position: relative;
+      padding: 1.35rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.8rem;
+      background:
+        radial-gradient(circle at 88% 14%, rgba(144, 214, 255, 0.14), transparent 26%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.02);
+      overflow: hidden;
+    }
+
+    .proof-block::after {
+      content: "";
+      position: absolute;
+      inset: auto -2rem -4rem auto;
+      width: 12rem;
+      height: 12rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(216, 239, 255, 0.12), transparent 72%);
+      pointer-events: none;
+    }
+
+    .list-block h3 {
+      margin: 0 0 1.1rem;
+      color: rgba(244, 247, 251, 0.74);
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .rule-list,
+    .proof-list,
+    .faq-list,
+    .contact-grid {
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    .rule-item,
+    .proof-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.95rem;
+      align-items: start;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .rule-item:first-child,
+    .proof-item:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .rule-number,
+    .proof-mark {
+      width: 1.85rem;
+      height: 1.85rem;
+      flex: none;
+      display: grid;
+      place-items: center;
+      margin-top: 0.15rem;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.02);
+      color: rgba(244, 247, 251, 0.7);
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    .rule-item strong,
+    .proof-item strong {
+      display: block;
+      margin-bottom: 0.18rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .proof-summary {
+      margin-top: 1.15rem;
+      padding-top: 1.15rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .proof-summary small,
+    .footer-group small {
+      display: block;
+      margin-bottom: 0.75rem;
+      color: rgba(244, 247, 251, 0.44);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .proof-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .proof-tags span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.25rem;
+      padding: 0.58rem 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.02);
+      color: rgba(244, 247, 251, 0.78);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .leaderboard-panel {
+      padding: clamp(1.5rem, 4vw, 2.9rem);
+    }
+
+    .leaderboard-top {
+      display: grid;
+      gap: 1.5rem;
+      align-items: end;
+      padding-bottom: 1.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .leaderboard-summary {
+      position: relative;
+      padding: 1.35rem 1.3rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: calc(var(--radius-md) + 0.15rem);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+        rgba(255, 255, 255, 0.025);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .leaderboard-summary small {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: rgba(244, 247, 251, 0.44);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .leaderboard-summary strong {
+      display: block;
+      font-size: 1.08rem;
+      line-height: 1.4;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .leaderboard-summary p {
+      margin: 0.65rem 0 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 0.96rem;
+    }
+
+    .leaderboard-shell {
+      display: grid;
+      gap: 0.95rem;
+      margin-top: 1.8rem;
+    }
+
+    .leaderboard-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.45rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.02);
+      overflow: hidden;
+    }
+
+    .leaderboard-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 52%, rgba(255, 255, 255, 0.02));
+    }
+
+    .leaderboard-item:nth-child(-n + 3) {
+      border-color: rgba(144, 214, 255, 0.2);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.12);
+    }
+
+    .leaderboard-rank,
+    .leaderboard-copy,
+    .leaderboard-badge {
+      position: relative;
+      z-index: 1;
+    }
+
+    .leaderboard-rank {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 3rem;
+      min-height: 3rem;
+      padding: 0.4rem 0.65rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 1rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+        rgba(255, 255, 255, 0.03);
+      color: rgba(244, 247, 251, 0.82);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .leaderboard-copy {
+      display: grid;
+      gap: 0.15rem;
+      min-width: 0;
+    }
+
+    .leaderboard-copy strong {
+      font-size: 1.04rem;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .leaderboard-copy span {
+      color: rgba(244, 247, 251, 0.5);
+      font-size: 0.78rem;
+      line-height: 1.45;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .leaderboard-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.2rem;
+      padding: 0.55rem 0.85rem;
+      border: 1px solid rgba(144, 214, 255, 0.18);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(216, 239, 255, 0.16), rgba(144, 214, 255, 0.07)),
+        rgba(255, 255, 255, 0.03);
+      color: var(--accent);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .faq-stage {
+      align-items: start;
+    }
+
+    .faq-side .section-heading {
+      margin-bottom: 0;
+    }
+
+    .faq-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.7rem;
+    }
+
+    .faq-pills span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.45rem;
+      padding: 0.68rem 0.95rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.02);
+      color: rgba(244, 247, 251, 0.78);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .faq-item {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.45rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.018)),
+        rgba(255, 255, 255, 0.02);
+      transition: border-color 220ms ease, background 220ms ease, box-shadow 220ms ease, transform 220ms var(--ease);
+    }
+
+    .faq-item::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: linear-gradient(180deg, rgba(144, 214, 255, 0.7), rgba(144, 214, 255, 0));
+      opacity: 0;
+      transition: opacity 220ms ease;
+    }
+
+    .faq-item[data-open="true"] {
+      border-color: rgba(144, 214, 255, 0.2);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+        rgba(255, 255, 255, 0.03);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.16);
+      transform: translateY(-1px);
+    }
+
+    .faq-item[data-open="true"]::before {
+      opacity: 1;
+    }
+
+    .faq-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.2rem 1.25rem;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .faq-trigger span {
+      font-size: 0.98rem;
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: -0.02em;
+    }
+
+    .faq-icon {
+      position: relative;
+      width: 1.15rem;
+      height: 1.15rem;
+      flex: none;
+    }
+
+    .faq-icon::before,
+    .faq-icon::after {
+      content: "";
+      position: absolute;
+      inset: 50% auto auto 50%;
+      width: 0.95rem;
+      height: 1px;
+      background: rgba(244, 247, 251, 0.76);
+      transform: translate(-50%, -50%);
+      transition: transform 220ms ease, opacity 220ms ease;
+    }
+
+    .faq-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    .faq-item[data-open="true"] .faq-icon::after {
+      opacity: 0;
+      transform: translate(-50%, -50%) rotate(90deg) scaleX(0.3);
+    }
+
+    .faq-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 320ms var(--ease);
+    }
+
+    .faq-panel-inner {
+      padding: 0 1.25rem 1.25rem;
+    }
+
+    .contact-panel {
+      align-items: start;
+    }
+
+    .contact-grid {
+      display: grid;
+      align-content: start;
+    }
+
+    .contact-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 1rem 1.2rem;
+      min-height: 7rem;
+      padding: 1.15rem 1.2rem;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 1.65rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.025)),
+        rgba(255, 255, 255, 0.025);
+      transition:
+        transform 220ms var(--ease),
+        border-color 220ms ease,
+        background 220ms ease,
+        box-shadow 220ms ease;
+    }
+
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      inset: auto auto -2.5rem -2.5rem;
+      width: 9rem;
+      height: 9rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(216, 239, 255, 0.16), transparent 72%);
+      opacity: 0;
+      transition: opacity 220ms ease;
+      pointer-events: none;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(144, 214, 255, 0.22);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.035);
+      box-shadow: 0 20px 38px rgba(0, 0, 0, 0.18);
+    }
+
+    .contact-card:hover::before {
+      opacity: 1;
+    }
+
+    .contact-card-person {
+      min-height: 7.6rem;
+    }
+
+    .contact-card-hiring {
+      background:
+        radial-gradient(circle at 88% 18%, rgba(216, 239, 255, 0.12), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.03);
+    }
+
+    .contact-card-clark {
+      background:
+        radial-gradient(circle at 12% 18%, rgba(248, 251, 255, 0.14), transparent 24%),
+        radial-gradient(circle at 84% 22%, rgba(171, 220, 255, 0.12), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.03);
+    }
+
+    .contact-card-xavier {
+      background:
+        radial-gradient(circle at 12% 18%, rgba(210, 123, 58, 0.16), transparent 24%),
+        radial-gradient(circle at 84% 22%, rgba(116, 55, 25, 0.2), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.03);
+    }
+
+    .contact-card-main {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-card-avatar,
+    .contact-card-mark {
+      position: relative;
+      width: 4.6rem;
+      height: 4.6rem;
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.18rem;
+      border-radius: 1.35rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.04)),
+        rgba(255, 255, 255, 0.04);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 14px 28px rgba(0, 0, 0, 0.2);
+    }
+
+    .contact-card-avatar::after,
+    .contact-card-mark::after {
+      content: "";
+      position: absolute;
+      inset: -1rem;
+      border-radius: 1.8rem;
+      background: radial-gradient(circle, rgba(216, 239, 255, 0.18), transparent 62%);
+      opacity: 0;
+      transition: opacity 220ms ease;
+      pointer-events: none;
+    }
+
+    .contact-card:hover .contact-card-avatar::after,
+    .contact-card:hover .contact-card-mark::after {
+      opacity: 1;
+    }
+
+    .contact-card-avatar img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 1.15rem;
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .contact-card-mark {
+      padding: 0;
+      color: #f8fbff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .contact-card-mark span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-card-copy {
+      min-width: 0;
+      display: grid;
+      gap: 0.2rem;
+    }
+
+    .contact-card-copy strong {
+      font-size: 1.16rem;
+      line-height: 1.15;
+    }
+
+    .contact-card-copy small {
+      margin-bottom: 0.1rem;
+    }
+
+    .contact-card p {
+      margin: 0.25rem 0 0;
+      font-size: 0.92rem;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-card-role {
+      display: inline-flex;
+      width: fit-content;
+      margin-top: 0.45rem;
+      padding: 0.34rem 0.58rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(244, 247, 251, 0.56);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .contact-card-badge {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 4.8rem;
+      min-height: 2.4rem;
+      padding: 0.65rem 0.95rem;
+      border: 1px solid rgba(144, 214, 255, 0.18);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(216, 239, 255, 0.16), rgba(144, 214, 255, 0.07)),
+        rgba(255, 255, 255, 0.03);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: border-color 220ms ease, transform 220ms var(--ease), background 220ms ease;
+    }
+
+    .contact-card-badge::after {
+      content: "\2197";
+      margin-left: 0.34rem;
+      font-size: 0.82rem;
+      line-height: 1;
+    }
+
+    .contact-card:hover .contact-card-badge {
+      transform: translateX(2px);
+      border-color: rgba(144, 214, 255, 0.32);
+      background:
+        linear-gradient(180deg, rgba(216, 239, 255, 0.22), rgba(144, 214, 255, 0.09)),
+        rgba(255, 255, 255, 0.04);
+    }
+
+    .contact-note {
+      max-width: none;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.35rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.02);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .site-footer {
+      position: relative;
+      padding: 2rem 0 2.75rem;
+    }
+
+    .site-footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: min(calc(100% - 2rem), var(--container));
+      height: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    }
+
+    .footer-shell {
+      display: grid;
+      gap: 1.5rem;
+      padding: 1.5rem 0 0;
+    }
+
+    .footer-brand-link {
+      margin-bottom: 1rem;
+    }
+
+    .footer-copy {
+      max-width: 28rem;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .footer-brand-column {
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+    }
+
+    .footer-story {
+      display: grid;
+      gap: 0.85rem;
+      max-width: 31rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-story p {
+      margin: 0;
+      color: rgba(244, 247, 251, 0.58);
+      font-size: 0.9rem;
+      line-height: 1.78;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .footer-group {
+      padding: 1.1rem 1.15rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.4rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.02);
+    }
+
+    .footer-link-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1rem;
+    }
+
+    .footer-link-list a {
+      color: rgba(244, 247, 251, 0.82);
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: color 180ms ease;
+    }
+
+    .footer-link-list a:hover {
+      color: #ffffff;
+    }
+
+    .footer-link-grid {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .footer-contact-pill {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      width: 100%;
+      min-height: 3.25rem;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.15rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.02);
+      color: rgba(244, 247, 251, 0.86);
+      transition:
+        transform 220ms var(--ease),
+        border-color 220ms ease,
+        background 220ms ease;
+      overflow: hidden;
+    }
+
+    .footer-contact-pill::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 48%, rgba(255, 255, 255, 0.03));
+    }
+
+    .footer-contact-pill:hover {
+      transform: translateY(-2px);
+      border-color: rgba(144, 214, 255, 0.2);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.03);
+    }
+
+    .footer-contact-pill-clark {
+      background:
+        radial-gradient(circle at 14% 50%, rgba(248, 251, 255, 0.14), transparent 18%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+        rgba(255, 255, 255, 0.025);
+    }
+
+    .footer-contact-pill-xavier {
+      background:
+        radial-gradient(circle at 14% 50%, rgba(210, 123, 58, 0.16), transparent 18%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+        rgba(255, 255, 255, 0.025);
+    }
+
+    .footer-mini-avatar,
+    .footer-mini-mark {
+      width: 2.2rem;
+      height: 2.2rem;
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.12rem;
+      border-radius: 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+        rgba(255, 255, 255, 0.03);
+      overflow: hidden;
+    }
+
+    .footer-mini-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 0.66rem;
+    }
+
+    .footer-mini-mark {
+      padding: 0;
+      color: #f4f7fb;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .footer-contact-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      min-width: 0;
+    }
+
+    .footer-contact-copy strong {
+      font-size: 0.92rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-contact-copy span {
+      color: rgba(244, 247, 251, 0.5);
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .footer-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem 1rem;
+      padding-top: 1.25rem;
+      margin-top: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(244, 247, 251, 0.46);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    .js-ready .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 700ms ease, transform 700ms var(--ease);
+    }
+
+    .js-ready .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin-reverse {
+      from {
+        transform: rotate(360deg);
+      }
+      to {
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.9;
+      }
+      50% {
+        transform: scale(1.03);
+        opacity: 1;
+      }
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+      to {
+        transform: translate3d(-50%, 0, 0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.6;
+        transform: scale(1.2);
+      }
+    }
+
+    @keyframes border-pulse {
+      0%, 100% {
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      50% {
+        border-color: rgba(255, 0, 0, 0.5);
+      }
+    }
+
+    @media (min-width: 700px) {
+      .site-header {
+        padding: 1rem 1.2rem 0;
+      }
+
+      .header-bar {
+        padding: 0.95rem 1.15rem;
+      }
+
+      .nav-links {
+        display: inline-flex;
+      }
+
+      .hero {
+        padding-bottom: 5.5rem;
+      }
+
+      .services-intro {
+        grid-template-columns: minmax(0, 1fr) minmax(18rem, 23rem);
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .trust-columns {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contact-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contact-card-hiring {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .hero-stage {
+        grid-template-columns: minmax(0, 1.02fr) minmax(19rem, 0.98fr);
+        grid-template-areas:
+          "copy desk"
+          "proof desk";
+        row-gap: 1rem;
+        align-items: start;
+      }
+
+      .hero-desk {
+        min-height: 100%;
+        align-self: stretch;
+      }
+
+      .hero-proof-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-meta {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .trust-top {
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      }
+
+      .leaderboard-top {
+        grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
+      }
+
+      .faq-stage {
+        grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .services-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .trust-metrics {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .trust-columns {
+        grid-template-columns: minmax(0, 1.18fr) minmax(18rem, 0.82fr);
+        gap: 1.3rem;
+      }
+
+      .rule-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 1.2rem;
+        row-gap: 0;
+      }
+
+      .rule-item:nth-child(-n + 2) {
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      .proof-block {
+        position: sticky;
+        top: 7.5rem;
+      }
+
+      .faq-side {
+        position: sticky;
+        top: 7.5rem;
+      }
+
+      .contact-panel {
+        grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-note {
+        grid-column: 1 / -1;
+      }
+
+      .footer-shell {
+        grid-template-columns: minmax(0, 1fr) minmax(22rem, 30rem);
+        align-items: start;
+      }
+
+      .footer-link-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 699px) {
+      .hero-copy,
+      .hero-desk,
+      .hero-proof-strip {
+        grid-area: auto;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: calc(var(--header-offset) + 0.8rem) 0 2.4rem;
+      }
+
+      .site-header {
+        padding: 0.8rem 0.85rem 0;
+      }
+
+      .header-bar {
+        grid-template-columns: auto auto;
+      }
+
+      .brand span:last-child {
+        display: none;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(2rem, 10vw, 3.35rem);
+        max-width: 9.2ch;
+        letter-spacing: -0.06em;
+        line-height: 0.92;
+      }
+
+      .hero-copy p,
+      .section-heading p,
+      .trust-top p,
+      .contact-panel p {
+        font-size: 0.97rem;
+      }
+
+      .hero-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .orbital-labels {
+        display: none;
+      }
+
+      .trust-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-scope {
+        gap: 0.5rem;
+        margin-top: 1rem;
+        max-width: none;
+      }
+
+      .hero-scope span {
+        min-height: 2rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+      }
+
+      .hero-proof-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-stage {
+        gap: 0.95rem;
+        padding: 1rem;
+        border-radius: 1.85rem;
+      }
+
+      .hero-desk {
+        padding: 1rem;
+        border-radius: 1.45rem;
+      }
+
+      .hero-proof-item {
+        padding: 0.9rem 0.85rem;
+      }
+
+      .hero-proof-item strong {
+        font-size: 0.94rem;
+      }
+
+      .hero-proof-item span {
+        font-size: 0.75rem;
+      }
+
+      .hero-contact {
+        grid-template-columns: auto 1fr;
+      }
+
+      .hero-contact-arrow {
+        grid-column: 2;
+        justify-self: flex-start;
+        margin-top: 0.1rem;
+      }
+
+      .hero-contact-copy strong {
+        font-size: 0.92rem;
+      }
+
+      .hero-contact-copy span {
+        font-size: 0.76rem;
+      }
+
+      .contact-card {
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+      }
+
+      .proof-block {
+        padding: 1.15rem;
+      }
+
+      .contact-card-badge {
+        justify-self: flex-start;
+      }
+
+      .deal-tape-track {
+        gap: 1.6rem;
+        padding: 0.9rem 1rem;
+      }
+
+      .deal-tape-track span {
+        font-size: 0.74rem;
+        letter-spacing: 0.14em;
+      }
+
+      .leaderboard-item {
+        grid-template-columns: auto 1fr;
+        align-items: start;
+      }
+
+      .leaderboard-badge {
+        grid-column: 2;
+        justify-self: flex-start;
+      }
+
+      .leaderboard-rank {
+        min-width: 2.7rem;
+        min-height: 2.7rem;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .container {
+        width: min(100% - 1.5rem, var(--container));
+      }
+
+      .hero,
+      .section,
+      .deal-tape-section {
+        overflow: clip;
+      }
+
+      .stage-panel,
+      .trust-panel,
+      .faq-stage,
+      .contact-panel {
+        border-radius: 1.75rem;
+      }
+
+      .services-stage,
+      .trust-panel,
+      .faq-stage,
+      .contact-panel {
+        padding: 1.15rem;
+      }
+
+      .faq-trigger,
+      .contact-card,
+      .service-card {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .service-card {
+        min-height: 13.4rem;
+      }
+    }
+
+    .hero-stage {
+      background:
+        radial-gradient(circle at 50% 22%, rgba(35, 138, 255, 0.26), transparent 22%),
+        radial-gradient(circle at 12% 84%, rgba(255, 255, 255, 0.06), transparent 20%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+        rgba(4, 7, 13, 0.88);
+      border-color: rgba(95, 173, 255, 0.16);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 28px 70px rgba(0, 0, 0, 0.46),
+        0 0 60px rgba(31, 143, 255, 0.08);
+    }
+
+    .hero-desk,
+    .stage-panel,
+    .trust-panel,
+    .faq-stage,
+    .contact-panel,
+    .service-card,
+    .proof-block,
+    .deal-tape,
+    .contact-card,
+    .faq-item,
+    .footer-group,
+    .footer-contact-pill,
+    .hero-contact,
+    .hero-ledger div,
+    .hero-desk-note,
+    .hero-proof-item,
+    .contact-note {
+      border-color: rgba(95, 173, 255, 0.16);
+      background:
+        radial-gradient(circle at 86% 14%, rgba(35, 138, 255, 0.12), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+        rgba(4, 7, 13, 0.86);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 22px 52px rgba(0, 0, 0, 0.32),
+        0 0 36px rgba(31, 143, 255, 0.06);
+    }
+
+    .service-card:hover,
+    .contact-card:hover,
+    .faq-item[data-open="true"] {
+      border-color: rgba(113, 189, 255, 0.3);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 26px 58px rgba(0, 0, 0, 0.38),
+        0 0 42px rgba(31, 143, 255, 0.12);
+    }
+
+    .button-primary,
+    .hero-contact-arrow,
+    .contact-card-badge {
+      border-color: rgba(100, 177, 255, 0.3);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(46, 163, 255, 0.2)),
+        rgba(8, 21, 40, 0.86);
+      color: #ffffff;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 0 28px rgba(31, 143, 255, 0.12);
+    }
+
+    .button-primary:hover,
+    .contact-card:hover .contact-card-badge {
+      border-color: rgba(126, 198, 255, 0.46);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.26), rgba(46, 163, 255, 0.28)),
+        rgba(11, 27, 50, 0.94);
+    }
+
+    .button-secondary,
+    .hero-badge,
+    .hero-scope span,
+    .faq-pills span,
+    .service-note {
+      border-color: rgba(95, 173, 255, 0.18);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(46, 163, 255, 0.08)),
+        rgba(7, 13, 24, 0.78);
+      color: rgba(248, 252, 255, 0.9);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .hero-proof-strip,
+    .site-footer::before,
+    .section::before {
+      background: linear-gradient(90deg, transparent, rgba(98, 176, 255, 0.2), transparent);
+    }
+
+    .deal-tape::before {
+      background: linear-gradient(90deg, rgba(4, 7, 13, 0.98), rgba(4, 7, 13, 0));
+    }
+
+    .deal-tape::after {
+      background: linear-gradient(270deg, rgba(4, 7, 13, 0.98), rgba(4, 7, 13, 0));
+    }
+
+    .deal-tape-track span::before,
+    .proof-mark,
+    .metric::before {
+      box-shadow: 0 0 20px rgba(46, 163, 255, 0.42);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition-duration: 0ms !important;
+        transition-delay: 0ms !important;
+      }
+
+      body::after {
+        display: none;
+      }
+
+      .reveal,
+      .js-ready .reveal,
+      .js-ready .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="header-bar">
+        <a class="brand" href="#top" aria-label="MM Deal Desk home">
+          <span class="brand-mark" aria-hidden="true"><img src="./assets/mm.png" alt=""></span>
+          <span>Fake MM</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#services">Services</a>
+          <a href="#trust">Trust</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a class="nav-contact" href="#contact">Start Deal</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-layout">
+          <div class="hero-stage">
+            <div class="hero-copy reveal">
+              <div class="eyebrow">Welcome to the first & only legit fake MM service</div>
+              <h1>The #1 Fake Middleman</h1>
+
+              <div class="hero-scope" aria-label="Coverage overview">
+                <span>Accounts</span>
+                <span>Usernames</span>
+                 <span>Verified Socials</span>
+                <span>Data Deals</span>
+                <span>Telegram Gifts</span>
+                <span>Anonymous Numbers</span>
+                <span>Crypto Exchanges</span>
+              </div>
+            </div>
+
+            <aside class="hero-desk reveal" aria-label="Deal desk">
+              <div class="hero-desk-head">
+                <small>Direct lines</small>
+                <strong>Pick the fake MM that fits the ticket.</strong>
+                <p>For live deals, go straight to Clark or Xavier. For opportunities and staffing, use Hiring.</p>
+              </div>
+
+              <div class="hero-contact-stack">
+                <a class="hero-contact hero-contact-clark" href="https://t.me/beat" target="_blank" rel="noreferrer">
+                  <span class="hero-contact-avatar" aria-hidden="true">
+                    <img src="./assets/clark-avatar.jpg" alt="">
+                  </span>
+                  <span class="hero-contact-copy">
+                    <strong>clark</strong>
+                  </span>
+                  <span class="hero-contact-arrow">Open</span>
+                </a>
+
+                <a class="hero-contact hero-contact-xavier" href="https://t.me/zuko" target="_blank" rel="noreferrer">
+                  <span class="hero-contact-avatar" aria-hidden="true">
+                    <img src="./assets/xavier-avatar.jpg" alt="">
+                  </span>
+                  <span class="hero-contact-copy">
+                    <strong>xavier</strong>
+                  </span>
+                  <span class="hero-contact-arrow">Open</span>
+                </a>
+
+                <a class="hero-contact hero-contact-hiring" href="https://t.me/hiring" target="_blank" rel="noreferrer">
+                  <span class="hero-contact-avatar" aria-hidden="true">
+                    <img src="./assets/mm.png" alt="">
+                  </span>
+                  <span class="hero-contact-copy">
+                    <strong>Hiring</strong>
+                  </span>
+                  <span class="hero-contact-arrow">Open</span>
+                </a>
+              </div>
+
+              <p class="hero-desk-note">
+                Before the chat opens, send the username, exact deal, and proof both sides already accepted the "middleman".
+              </p>
+            </aside>
+
+            <div class="hero-proof-strip reveal" aria-label="Trust signals">
+              <div class="hero-proof-item">
+                <strong>4+ years</strong>
+                <span>Established experience.</span>
+              </div>
+              <div class="hero-proof-item">
+                <strong>$1M+</strong>
+                <span>Completed split volume.</span>
+              </div>
+              <div class="hero-proof-item">
+                <strong>6,000+</strong>
+                <span>Historical splits handled.</span>
+              </div>
+              <div class="hero-proof-item">
+                <strong>&lt;10 min</strong>
+                <span>Typical reply window.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="deal-tape-section" aria-label="Deal types">
+        <div class="container">
+          <div class="deal-tape">
+            <div class="deal-tape-window">
+              <div class="deal-tape-track">
+                <span>Discord accounts</span>
+                <span>Crypto exchange deals</span>
+                <span>Buyer-first structures</span>
+                <span>Verified socials</span>
+                <span>Premium usernames</span>
+                <span>Exclusive NFTs</span>
+                <span>High-value domains</span>
+                <span>Trading accounts</span>
+                <span>Fast settlements</span>
+                <span>Trusted intermediaries</span>
+                <span>Global reach</span>
+                <span>Quality assurance</span>
+                <span>Discord accounts</span>
+                <span>Crypto exchange deals</span>
+                <span>Buyer-first structures</span>
+                <span>Verified socials</span>
+                <span>Premium usernames</span>
+                <span>Exclusive NFTs</span>
+                <span>High-value domains</span>
+                <span>Trading accounts</span>
+                <span>Secure transactions</span>
+                <span>Fast settlements</span>
+                <span>Trusted intermediaries</span>
+                <span>Global reach</span>
+                <span>Verified buyers</span>
+                <span>Quality assurance</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="services">
+        <div class="container">
+          <div class="stage-panel services-stage">
+            <div class="services-intro">
+              <div class="section-heading reveal">
+                <div class="eyebrow">Coverage</div>
+                <h2>We can MM almost everything now.</h2>
+                <p>
+                  The scope is intentionally broad, but the standard stays narrow: if the deal is reliable,
+                  valuable, and both sides want a "middleman", this is where it gets handled.
+                </p>
+              </div>
+
+              <aside class="services-note reveal">
+                <small>Deal Modes</small>
+                <strong>Buyer-first, crypto, high-value assets, business deals, and custom tickets.</strong>
+                <p>Serious only. Large tickets stay discretionary. Unlisted or data deals still follow the upfront rule.</p>
+              </aside>
+            </div>
+
+            <div class="services-grid">
+              <article class="service-card reveal">
+                <span class="service-index">01</span>
+                <h3>Discord Accounts</h3>
+                <p>Clean handling for account transfers, access changes, and high-value ownership swaps.</p>
+              </article>
+
+              <article class="service-card reveal">
+                <span class="service-index">02</span>
+                <h3>Verified TikToks / Insane Users</h3>
+                <p>For standout profiles, verified pages, and usernames that move with real demand.</p>
+              </article>
+
+              <article class="service-card reveal">
+                <span class="service-index">03</span>
+                <h3>Instagram Usernames</h3>
+                <p>Short, rare, or premium names where the transfer itself is the entire value.</p>
+              </article>
+
+              <article class="service-card reveal">
+                <span class="service-index">04</span>
+                <h3>Roblox Accounts</h3>
+                <p>Any type of Roblox account deal, from rare inventories to established profiles.</p>
+              </article>
+
+              <article class="service-card reveal">
+                <span class="service-index">05</span>
+                <h3>Minecraft Accounts</h3>
+                <p>All MC account transactions with a controlled group-chat flow and proof-first process.</p>
+              </article>
+
+              <article class="service-card reveal">
+                <span class="service-index">06</span>
+                <h3>Verified YouTube Accounts</h3>
+                <p>Handled for deals where ownership, recovery posture, and clear communication matter.</p>
+              </article>
+
+              <article class="service-card reveal">
+                <span class="service-index">07</span>
+                <h3>NFTs, Usernames, Numbers, Gifts</h3>
+                <p>Anonymous numbers, premium names, NFTs, and gifts that carry real market value.</p>
+                <div class="service-note">Gifts $250+ / Usernames $500+</div>
+              </article>
+
+              <article class="service-card reveal">
+                <span class="service-index">08</span>
+                <h3>Shuffle / Stake Wagered Accounts</h3>
+                <p>For heavily wagered or otherwise exceptional gambling-related account transfers.</p>
+              </article>
+
+              <article class="service-card reveal">
+                <span class="service-index">09</span>
+                <h3>Kick / Twitch Verified + Usernames</h3>
+                <p>Verified channels and good names where reputation and speed both matter on both sides.</p>
+              </article>
+
+              <article class="service-card reveal">
+                <span class="service-index">10</span>
+                <h3>Buyer-First Deal Structures</h3>
+                <p>We can middleman any type of deal that makes the buyer send the money first.</p>
+              </article>
+
+              <article class="service-card reveal">
+                <span class="service-index">11</span>
+                <h3>Crypto Exchange Deals</h3>
+                <p>Crypto exchange deals can be handled with the same controlled group-chat process.</p>
+              </article>
+
+              <article class="service-card reveal">
+                <span class="service-index">12</span>
+                <h3>Business / Unlisted Deals</h3>
+                <p>Business deals and anything not listed above can still be handled when the structure is clear.</p>
+                <div class="service-note">30% upfront before continuing</div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="trust">
+        <div class="container">
+          <div class="trust-panel reveal">
+            <div class="trust-top">
+              <div>
+                <div class="eyebrow">Trust signals</div>
+                <h2>Trust is built in receipts, speed, and process.</h2>
+              </div>
+              <p>
+                High-end deals do not need noise. They need a neutral operator, a clean handoff,
+                and a process that both sides accept before money or assets move.
+              </p>
+            </div>
+
+            <div class="trust-metrics">
+              <div class="metric">
+                <strong>4+</strong>
+                <span>Years of middleman experience in digital markets.</span>
+              </div>
+              <div class="metric">
+                <strong class="metric-value-compact">$1,500,000+</strong>
+                <span>Total completed splits across previous channels.</span>
+              </div>
+              <div class="metric">
+                <strong>6,000+</strong>
+                <span>Historical splits handled with repeat activity.</span>
+              </div>
+              <div class="metric">
+                <strong class="metric-value-compact">Under 10 min</strong>
+                <span>Typical response window while we are online and awake.</span>
+              </div>
+              <div class="metric">
+                <strong>50%</strong>
+                <span>Standard split rate.</span>
+              </div>
+              <div class="metric">
+                <strong>$250</strong>
+                <span>Minimum deal threshold.</span>
+              </div>
+              <div class="metric">
+                <strong class="metric-value-compact">$500,000</strong>
+                <span>Maximum Fake MM ticket we may move if the buyer and seller look serious.</span>
+              </div>
+              <div class="metric">
+                <strong class="metric-value-compact">30% upfront</strong>
+                <span>Required for business deals and anything outside the listed categories.</span>
+              </div>
+            </div>
+
+            <div class="trust-columns">
+              <div class="list-block">
+                <h3>Rules / TOS</h3>
+                <div class="rule-list">
+                  <div class="rule-item">
+                    <div class="rule-number">1</div>
+                    <p>
+                      <strong>Get both sides to accept first.</strong>
+                      Do not message us if the seller or buyer did not accept us as "middleman". If someone accepts us,
+                      message us with the username, what the deal is, and a screenshot.
+                    </p>
+                  </div>
+                  <div class="rule-item">
+                    <div class="rule-number">2</div>
+                    <p>
+                      <strong>No premium requirements.</strong>
+                      You do not need premium, and you do not need a good profile. Anyone can work with us anytime.
+                    </p>
+                  </div>
+                  <div class="rule-item">
+                    <div class="rule-number">3</div>
+                    <p>
+                      <strong>Find the buyer or seller before contacting.</strong>
+                      Once the deal exists, message us and we will open the middleman group chat.
+                    </p>
+                  </div>
+                  <div class="rule-item">
+                    <div class="rule-number">4</div>
+                    <p>
+                      <strong>Do not rush payout while the deal is live.</strong>
+                      Your split will be paid in one TXID and posted in the <a class="inline-link" href="https://t.me/splits" target="_blank" rel="noreferrer">@splits</a> channel
+                      once the deal is fully completed.
+                    </p>
+                  </div>
+                  <div class="rule-item">
+                    <div class="rule-number">5</div>
+                    <p>
+                      <strong>Non-NFT gift risk stays on the deal.</strong>
+                      We are not responsible if we lick a non-NFT gift and the account holding the gift on gets banned.
+                    </p>
+                  </div>
+                  <div class="rule-item">
+                    <div class="rule-number">6</div>
+                    <p>
+                      <strong>Accounts can still get pulled during securing.</strong>
+                      We are not responsible if the account gets pulled during the securing. You must SE the seller to wait 72 hours in the middleman ticket.
+                    </p>
+                  </div>
+                  <div class="rule-item">
+                    <div class="rule-number">7</div>
+                    <p>
+                      <strong>Data and unlisted deals require money upfront.</strong>
+                      If you want us to MM data, or anything not mentioned above, you have to pay a 30% fee upfront before continuing with the seller.
+                    </p>
+                  </div>
+                  <div class="rule-item">
+                    <div class="rule-number">8</div>
+                    <p>
+                      <strong>Part of that upfront fee is non-refundable.</strong>
+                      If the seller time-wastes or backs out after you paid the fee, you will only receive 27% back. A 3% fee is non-refundable.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="list-block proof-block">
+                <h3>Why People Trust Us</h3>
+                <div class="proof-list">
+                  <div class="proof-item">
+                    <div class="proof-mark">A</div>
+                    <p>
+                      <strong>4+ years of experience.</strong>
+                      Long-term fake middleman activity across digital deals.
+                    </p>
+                  </div>
+                  <div class="proof-item">
+                    <div class="proof-mark">B</div>
+                    <p>
+                      <strong>Over $1,500,000+ in completed splits.</strong>
+                      Built on real volume rather than one-off transactions.
+                    </p>
+                  </div>
+                  <div class="proof-item">
+                    <div class="proof-mark">C</div>
+                    <p>
+                      <strong>6,000+ splits across previous channels.</strong>
+                      Repeat activity, historical payouts, and years of deal flow.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="proof-summary">
+                  <small>At a glance</small>
+                  <div class="proof-tags">
+                    <span>4+ years</span>
+                    <span>$1M+ completed</span>
+                    <span>6,000+ handled</span>
+                    <span>Under 10 min replies</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+            <section class="section" id="leaderboard">
+        <div class="container">
+          <div class="stage-panel leaderboard-panel reveal">
+            <div class="leaderboard-top">
+              <div class="section-heading">
+                <div class="eyebrow">Most Notable Workers </div>
+                <h2>Our Top 10 Notable Workers</h2>
+                <p>
+                  Top 10 best workers leaderboard who have made $50,000+ with us.
+                </p>
+              </div>
+
+              <aside class="leaderboard-summary">
+                <small>Current Leaderboard</small>
+                <strong>10 elite workers, making money everyday.</strong>
+                <p>Working with us for months upon months and making High 5 Figures.</p>
+              </aside>
+            </div>
+
+            <div class="leaderboard-shell" aria-label="Top 10 notable team members">
+              <article class="leaderboard-item">
+                <div class="leaderboard-rank">#1</div>
+                <div class="leaderboard-copy">
+                  <strong>7l</strong>
+                </div>
+                <div class="leaderboard-badge">Core member</div>
+              </article>
+
+              <article class="leaderboard-item">
+                <div class="leaderboard-rank">#2</div>
+                <div class="leaderboard-copy">
+                  <strong>$</strong>
+                </div>
+                <div class="leaderboard-badge">Core member</div>
+              </article>
+
+              <article class="leaderboard-item">
+                <div class="leaderboard-rank">#3</div>
+                <div class="leaderboard-copy">
+                  <strong>deficit</strong>
+                </div>
+                <div class="leaderboard-badge">Core member</div>
+              </article>
+
+              <article class="leaderboard-item">
+                <div class="leaderboard-rank">#4</div>
+                <div class="leaderboard-copy">
+                  <strong>route</strong>
+                </div>
+                <div class="leaderboard-badge">Team member</div>
+              </article>
+
+              <article class="leaderboard-item">
+                <div class="leaderboard-rank">#5</div>
+                <div class="leaderboard-copy">
+                  <strong>uknown</strong>
+                </div>
+                <div class="leaderboard-badge">Team member</div>
+              </article>
+
+              <article class="leaderboard-item">
+                <div class="leaderboard-rank">#6</div>
+                <div class="leaderboard-copy">
+                  <strong>ledger transfers</strong>
+                </div>
+                <div class="leaderboard-badge">Team member</div>
+              </article>
+
+              <article class="leaderboard-item">
+                <div class="leaderboard-rank">#7</div>
+                <div class="leaderboard-copy">
+                  <strong>inzol</strong>
+                </div>
+                <div class="leaderboard-badge">Team member</div>
+              </article>
+
+              <article class="leaderboard-item">
+                <div class="leaderboard-rank">#8</div>
+                <div class="leaderboard-copy">
+                  <strong>astra</strong>
+                </div>
+                <div class="leaderboard-badge">Team member</div>
+              </article>
+
+              <article class="leaderboard-item">
+                <div class="leaderboard-rank">#9</div>
+                <div class="leaderboard-copy">
+                  <strong>baselgold</strong>
+                </div>
+                <div class="leaderboard-badge">Team member</div>
+              </article>
+
+              <article class="leaderboard-item">
+                <div class="leaderboard-rank">#10</div>
+                <div class="leaderboard-copy">
+                  <strong>1c</strong>
+                </div>
+                <div class="leaderboard-badge">Team member</div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="container">
+          <div class="faq-stage">
+            <div class="faq-side">
+              <div class="section-heading reveal">
+                <div class="eyebrow">FAQ</div>
+                <h2>Clean answers before the deal starts.</h2>
+                <p>
+                  If the transaction is serious, these are the only things that usually matter at the beginning.
+                </p>
+              </div>
+
+              <div class="faq-pills reveal" aria-label="Quick facts">
+                <span>50% split</span>
+                <span>$250 minimum</span>
+                <span>@OGUTrusted</span>
+              </div>
+            </div>
+
+            <div class="faq-list reveal">
+              <div class="faq-item" data-open="true">
+                <button class="faq-trigger" type="button" aria-expanded="true">
+                  <span>What do you "middleman"?</span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-panel">
+                  <div class="faq-panel-inner">
+                    <p>
+                      We handle Discord, verified TikTok, Instagram usernames, Roblox, Minecraft,
+                      verified YouTube, NFTs, premium usernames, anonymous numbers, gifts above $250,
+                      usernames above $500, Shuffle or Stake wagered accounts, verified Kick or Twitch deals,
+                      buyer-first structures, crypto exchange deals, business deals, and other serious custom transactions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item" data-open="false">
+                <button class="faq-trigger" type="button" aria-expanded="false">
+                  <span>Where do I find buyers / sellers?</span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-panel">
+                  <div class="faq-panel-inner">
+                    <p>
+                      We have no idea. That part is all on you. Our job is just sending you a group chat.
+                      The earning potential depends on your work: the less lazy you are, the more money you will make.
+                      You can make up to $XXX,XXX a month aslong as your consistent.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item" data-open="false">
+                <button class="faq-trigger" type="button" aria-expanded="false">
+                  <span>What's the split?</span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-panel">
+                  <div class="faq-panel-inner">
+                    <p>
+                      it will always be 50% no matter what.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item" data-open="false">
+                <button class="faq-trigger" type="button" aria-expanded="false">
+                  <span>What's the minimum?</span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-panel">
+                  <div class="faq-panel-inner">
+                    <p>
+                      The minimum deal will always be $250, nothing ever lower.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item" data-open="false">
+                <button class="faq-trigger" type="button" aria-expanded="false">
+                  <span>What's the OGU Channel?</span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-panel">
+                  <div class="faq-panel-inner">
+                    <p>
+                      <a class="inline-link" href="https://t.me/OGUTrusted" target="_blank" rel="noreferrer">@OGUTrusted</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item" data-open="false">
+                <button class="faq-trigger" type="button" aria-expanded="false">
+                  <span>How do the account / NFT splits work?</span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-panel">
+                  <div class="faq-panel-inner">
+                    <p>
+                      You will have to make the seller wait 72 hours in the MM ticket as mentioned below.
+                      After that, you need to wait until we find the right buyer for the NFT or account.
+                      Once it is sold, we send your 50% split.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item" data-open="false">
+                <button class="faq-trigger" type="button" aria-expanded="false">
+                  <span>How large can one MM ticket be?</span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-panel">
+                  <div class="faq-panel-inner">
+                    <p>
+                      We can move up to $500,000 in a single fake MM ticket, but only if we feel like the seller and buyer are serious.
+                      Large tickets are discretionary, not automatic.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item" data-open="false">
+                <button class="faq-trigger" type="button" aria-expanded="false">
+                  <span>How fast do you reply?</span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-panel">
+                  <div class="faq-panel-inner">
+                    <p>
+                      Most of the day we are online, and replies are usually under 10 minutes if we are awake.
+                      That is a real-world average, not a guarantee every minute of every day.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item" data-open="false">
+                <button class="faq-trigger" type="button" aria-expanded="false">
+                  <span>Who usually sends first?</span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-panel">
+                  <div class="faq-panel-inner">
+                    <p>
+                      Most of the time we will try our best to have the buyer or the seller send the money first.
+                      The exact flow depends on the deal, the risk, and how serious both sides look.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container">
+          <div class="contact-panel reveal">
+            <div>
+              <div class="eyebrow">Contact</div>
+              <h2>Start the group chat when the deal is ready.</h2>
+              <p>
+                Pick the contact that fits the situation. For active deals, go directly to clark or xavier.
+                For opportunities and staffing, use Hiring.
+              </p>
+            </div>
+
+            <div class="contact-grid">
+              <a class="contact-card contact-card-hiring" href="https://t.me/hiring" target="_blank" rel="noreferrer">
+                <div class="contact-card-main">
+                  <div class="contact-card-avatar" aria-hidden="true">
+                    <img src="./assets/mm.png" alt="">
+                  </div>
+                  <div class="contact-card-copy">
+                    <strong>Hiring</strong>
+                  </div>
+                </div>
+                <span class="contact-card-badge">Open</span>
+              </a>
+
+              <a class="contact-card contact-card-person contact-card-clark" href="https://t.me/beat" target="_blank" rel="noreferrer">
+                <div class="contact-card-main">
+                  <div class="contact-card-avatar" aria-hidden="true">
+                    <img src="./assets/clark-avatar.jpg" alt="">
+                  </div>
+                  <div class="contact-card-copy">
+                    <strong>clark</strong>
+                  </div>
+                </div>
+                <span class="contact-card-badge">Open</span>
+              </a>
+
+              <a class="contact-card contact-card-person contact-card-xavier" href="https://t.me/zuko" target="_blank" rel="noreferrer">
+                <div class="contact-card-main">
+                  <div class="contact-card-avatar" aria-hidden="true">
+                    <img src="./assets/xavier-avatar.jpg" alt="">
+                  </div>
+                  <div class="contact-card-copy">
+                    <strong>xavier</strong>
+                  </div>
+                </div>
+                <span class="contact-card-badge">Open</span>
+              </a>
+            </div>
+
+            <p class="contact-note">
+              Before messaging, make sure the buyer or seller already accepted us as middleman.
+              Then send the username, the exact deal, and proof they agreed. For business deals or anything unlisted,
+              the 30% upfront fee applies before continuing with the seller.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-shell">
+          <div class="footer-brand-column">
+            <a class="brand footer-brand-link" href="#top" aria-label="Middleman home">
+              <span class="brand-mark" aria-hidden="true"><img src="./assets/mm.png" alt=""></span>
+              <span>Fake Middleman</span>
+            </a>
+            <p class="footer-copy">
+              Serious digital deals, structured handoffs, fast replies, and a cleaner way to start the group chat when both sides are ready.
+            </p>
+            <div class="footer-story">
+              <p>
+                Built for people who already have the buyer or seller lined up and need the next step to feel clear,
+                controlled, and worth trusting once the money or assets are involved.
+              </p>
+              <p>
+                Read the rules first, pick the right contact, and move into the group chat only after both sides already
+                accepted the middleman and the deal terms are clear.
+              </p>
+            </div>
+          </div>
+
+          <div class="footer-links">
+            <div class="footer-group">
+              <small>Navigate</small>
+              <div class="footer-link-list">
+                <a href="#services">Services</a>
+                <a href="#trust">Trust</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
+              </div>
+            </div>
+
+            <div class="footer-group">
+              <small>Direct Links</small>
+              <div class="footer-link-grid">
+                <a class="footer-contact-pill footer-contact-pill-clark" href="https://t.me/beat" target="_blank" rel="noreferrer">
+                  <span class="footer-mini-avatar" aria-hidden="true">
+                    <img src="./assets/clark-avatar.jpg" alt="">
+                  </span>
+                  <span class="footer-contact-copy">
+                    <strong>clark</strong>
+                    <span>t.me/beat</span>
+                  </span>
+                </a>
+                <a class="footer-contact-pill footer-contact-pill-xavier" href="https://t.me/zuko" target="_blank" rel="noreferrer">
+                  <span class="footer-mini-avatar" aria-hidden="true">
+                    <img src="./assets/xavier-avatar.jpg" alt="">
+                  </span>
+                  <span class="footer-contact-copy">
+                    <strong>xavier</strong>
+                    <span>t.me/zuko</span>
+                  </span>
+                </a>
+                <a class="footer-contact-pill" href="https://t.me/hiring" target="_blank" rel="noreferrer">
+                  <span class="footer-mini-avatar" aria-hidden="true">
+                    <img src="./assets/mm.png" alt="">
+                  </span>
+                  <span class="footer-contact-copy">
+                    <strong>Hiring</strong>
+                    <span>t.me/hiring</span>
+                  </span>
+                </a>
+                <a class="footer-contact-pill" href="https://t.me/OGUTrusted" target="_blank" rel="noreferrer">
+                  <span class="footer-mini-avatar" aria-hidden="true">
+                    <img src="./assets/ogu.jpg" alt="">
+                  </span>
+                  <span class="footer-contact-copy">
+                    <strong>OGU Channel</strong>
+                    <span>@OGUTrusted</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-meta">
+          <span>Middleman</span>
+          <span>Clark &amp; Xavier</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const revealItems = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.18,
+      rootMargin: "0px 0px -10% 0px"
+    });
+
+    revealItems.forEach((item, index) => {
+      item.style.transitionDelay = `${Math.min(index * 45, 180)}ms`;
+      revealObserver.observe(item);
+    });
+
+    const faqItems = document.querySelectorAll(".faq-item");
+
+    function setFaqState(item, open) {
+      const button = item.querySelector(".faq-trigger");
+      const panel = item.querySelector(".faq-panel");
+      item.dataset.open = open ? "true" : "false";
+      button.setAttribute("aria-expanded", String(open));
+      panel.style.maxHeight = open ? `${panel.scrollHeight}px` : "0px";
+    }
+
+    faqItems.forEach((item) => {
+      const button = item.querySelector(".faq-trigger");
+      const isOpen = item.dataset.open === "true";
+      setFaqState(item, isOpen);
+
+      button.addEventListener("click", () => {
+        const shouldOpen = item.dataset.open !== "true";
+        faqItems.forEach((faq) => setFaqState(faq, false));
+        if (shouldOpen) {
+          setFaqState(item, true);
+        }
+      });
+    });
+
+    const root = document.documentElement;
+    const hero = document.querySelector(".hero");
+    let ticking = false;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (!prefersReducedMotion.matches) {
+      window.addEventListener("pointermove", (event) => {
+        root.style.setProperty("--mouse-x", `${event.clientX}px`);
+        root.style.setProperty("--mouse-y", `${event.clientY}px`);
+      }, { passive: true });
+    }
+
+    function updateHeroDepth() {
+      if (!hero) {
+        ticking = false;
+        return;
+      }
+
+      const rect = hero.getBoundingClientRect();
+      const progress = Math.max(-1, Math.min(1, rect.top / window.innerHeight));
+      root.style.setProperty("--hero-shift", `${progress * -18}px`);
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeroDepth);
+        ticking = true;
+      }
+    }
+
+    updateHeroDepth();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", () => {
+      updateHeroDepth();
+      faqItems.forEach((item) => {
+        if (item.dataset.open === "true") {
+          const panel = item.querySelector(".faq-panel");
+          panel.style.maxHeight = `${panel.scrollHeight}px`;
+        }
+      });
+    });
+
+    // Marquee animation
+    const track = document.querySelector('.deal-tape-track');
+    if (track) {
+      let position = 0;
+      const speed = 2; // pixels per frame
+      function animate() {
+        position -= speed;
+        if (position <= -track.offsetWidth / 2) {
+          position = 0;
+        }
+        track.style.transform = `translateX(${position}px)`;
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+  </script>
+</body>
+</html>
